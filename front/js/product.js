@@ -7,13 +7,14 @@ const fullGetOneProductURL = getOneProductURL + idProduct
 
 const cartContent = JSON.parse(localStorage.getItem('cart'))
 if(!cartContent){
-
     localStorage.setItem('cart', JSON.stringify([]))
 }
 
-const displayProductById = () => {
-  
-    fetch(fullGetOneProductURL).then(res => res.json()).then(res=> {
+const currentProduct = fetch(fullGetOneProductURL).then(res=>res.json())
+
+const displayProductById = async () => {
+        const res = await currentProduct;
+    
         /* Add image in DOM */
         const item__img = document.querySelector('.item__img')
         item__img.innerHTML = `<img src=${res.imageUrl} alt=${res.altText}>`
@@ -42,7 +43,7 @@ const displayProductById = () => {
             return option
         })
         select.append(...allColorsElem)           
-    })
+    
 }
 
 displayProductById()

@@ -1,10 +1,11 @@
 const allProductsURL = 'http://localhost:3000/api/products'
+
 const displayAllProducts = fetch(allProductsURL).then(res => res.json()).then(res => {
 
     
     const itemsEl = document.querySelector('#items');
    
-    const allProductsElem =  res.map((el)=>{
+        res.forEach((el)=>{
 
         const DOM_a = document.createElement('a');
         DOM_a.href = `./product.html?id=${el._id}`
@@ -13,11 +14,11 @@ const displayAllProducts = fetch(allProductsURL).then(res => res.json()).then(re
             <h3 class="productName">${el.name}</h3>
             <p class="productDescription">${el.description}</p>
             </article>` 
+            itemsEl.appendChild(DOM_a)
         return DOM_a
 })
 
-itemsEl.append(...allProductsElem)
-
     })
+
 
 
