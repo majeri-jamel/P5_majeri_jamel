@@ -1,6 +1,6 @@
 const allProductsURL = 'http://localhost:3000/api/products'
 
-const displayAllProducts = fetch(allProductsURL).then(res => res.json()).then(res => {
+fetch(allProductsURL).then(res => res.json()).then(res => {
 
     
     const itemsEl = document.querySelector('#items');
@@ -16,9 +16,8 @@ const displayAllProducts = fetch(allProductsURL).then(res => res.json()).then(re
             </article>` 
             itemsEl.appendChild(DOM_a)
         return DOM_a
+        })
 })
-
-    })
 
 
 

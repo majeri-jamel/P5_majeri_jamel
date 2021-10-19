@@ -1,14 +1,16 @@
 const allProductsURL = 'http://localhost:3000/api/products/'
+const orderURL_page = 'confirmation.html'
+
 
 const sectionEl = document.querySelector('#cart__items')
 const totalQuantity_DOM = document.querySelector('#totalQuantity') 
 const totalPrice_DOM = document.querySelector('#totalPrice') 
 
-
 const data = fetch(allProductsURL).then(response => response.json())
 
 const displayCartContent = async () => {
-  const cartContent = JSON.parse(localStorage.getItem('cart'))
+  const cartContent = JSON.parse(localStorage.getItem('cart'))  || []
+  
 
   const totalQuantity = cartContent.reduce((acc, curr) => acc + parseInt(curr.quantity), 0)
   const allProducts = await data
@@ -112,12 +114,80 @@ const handleQuantity = (newQuantity, idProductWithColor) => {
   displayCartContent();
 }
 
-const handleForm = () => {
+
+const form_DOM = document.querySelector('.cart__order__form')
 const firstName_DOM = document.querySelector('#firstName')
-firstName_DOM.addEventListener('change',()=> {
-  console.log(firstName_DOM.value);
-})
+const lastName_DOM = document.querySelector('#lastName')
+const address_DOM = document.querySelector('#address')
+const city_DOM = document.querySelector('#city')
+const email_DOM = document.querySelector('#email')
+
+const firstName_DOM_ErrorMsg = document.querySelector('#firstNameErrorMsg')
+const lastName_DOM_ErrorMsg = document.querySelector('#lastNameErrorMsg')
+const address_DOM_ErrorMsg = document.querySelector('#addressErrorMsg')
+const city_DOM_ErrorMsg = document.querySelector('#cityErrorMsg')
+const email_DOM_ErrorMsg = document.querySelector('#emailErrorMsg')
+
+const order_DOM = document.querySelector('#order')
+const allFormArray = [firstName_DOM, lastName_DOM, address_DOM, city_DOM, email_DOM]
+const allErrorsDOMArray = [firstName_DOM_ErrorMsg, lastName_DOM_ErrorMsg, address_DOM_ErrorMsg, city_DOM_ErrorMsg, email_DOM_ErrorMsg]
+const errorsArray = []
+
+
+const checkForm = () => {
+errorsArray.length = 0;
+  allFormArray.forEach(el=> {
+    const el_error_DOM =  document.querySelector(`#${el.name}ErrorMsg`)
+    el_error_DOM.textContent = ""
+  
+    if(el.value.trim() === ''){
+     el_error_DOM.textContent = "Ce champs ne doit pas être vide"
+     errorsArray.push(el.name + 'ErrorMsg')
+    }
+  })
+  
+  /* check email format*/
+
+const mailRegEx = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+  if(!mailRegEx.test(email_DOM.value)){
+
+  email_DOM_ErrorMsg.textContent = 'Veuillez saisir un mail valide'
+  errorsArray.push(email_DOM.name + 'ErrorMsgFormatMail')
+}
+
 
 }
+
+form_DOM.addEventListener('keypress',()=> {
+  checkForm()
+ 
+})
+
+const handleForm = () => {
+
+/* remove error message */
+
+allFormArray.forEach(el=>{
+ 
+  document.querySelector(`#${el.name}ErrorMsg`).textContent = ""
+})
+
+/* add values to localstorage */
+  order_DOM.addEventListener('click',(e)=>{
+    const isProductsInCart = (localStorage.getItem('cart') || []).length
+    e.preventDefault()
+    const contact = {firstName:firstName_DOM.value, lastName:lastName_DOM.value, address:address_DOM.value, city:city_DOM.value, email:email_DOM.value}
+    if(!errorsArray.length && isProductsInCart && firstName_DOM.value && lastName_DOM.value && address_DOM.value && city_DOM.value && email_DOM.value){
+      localStorage.setItem('contact', JSON.stringify(contact))
+      window.location.replace(orderURL_page)
+    }
+  
+  })
+}
+
 handleForm()
+
+
+
 

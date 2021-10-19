@@ -5,10 +5,7 @@ const idProduct = currentURL.searchParams.get('id')
 
 const fullGetOneProductURL = getOneProductURL + idProduct
 
-const cartContent = JSON.parse(localStorage.getItem('cart'))
-if(!cartContent){
-    localStorage.setItem('cart', JSON.stringify([]))
-}
+const cartContent = JSON.parse(localStorage.getItem('cart')) || []
 
 const currentProduct = fetch(fullGetOneProductURL).then(res=>res.json())
 
