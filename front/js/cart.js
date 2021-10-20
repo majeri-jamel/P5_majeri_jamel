@@ -18,7 +18,7 @@ const displayCartContent = async () => {
 
   let totalPrice = 0
 
-    const productsEl = cartContent.forEach(productCart => {        
+     cartContent.forEach(productCart => {        
 
         const productDetails= allProducts.find(product => product._id === productCart.id)
        totalPrice += productDetails.price * productCart.quantity 
@@ -64,7 +64,6 @@ const displayCartContent = async () => {
       deleteItem_DOM.addEventListener('click',()=>removeProduct(idProductWithColor));
      
       const itemQuantity_DOM = el.querySelector('.itemQuantity');
-      const newQuantity =  itemQuantity_DOM.value;
       itemQuantity_DOM.addEventListener('click', (e)=>{
         const newQuantity =  itemQuantity_DOM.value;
         handleQuantity(newQuantity, idProductWithColor);
