@@ -8,6 +8,8 @@ const postOrder = async () => {
         return el.id
       })     
       const orderId_DOM = document.querySelector('#orderId')
+      const confirmation_DOM = document.querySelector('.confirmation')
+    
       const rawResponse = await fetch(orderURL_API, {
         method: 'POST',
         headers: {
@@ -16,8 +18,9 @@ const postOrder = async () => {
         },
         body: JSON.stringify({contact: contact, products:productsId })
       }).then(res=>res.json()).then(res=>{
-            orderId_DOM.textContent = res.orderId
-            localStorage.clear()
+        confirmation_DOM.innerHTML = res.orderId ? `<p>Command validée ! <br>Votre numéro de commande est : <span>${res.orderId}</span><br>Merci et à bientôt</br>` : null
+
+         localStorage.clear()
       });
     }
 
