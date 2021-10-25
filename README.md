@@ -1,16 +1,92 @@
-# Kanap #
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>Kanap</title>
 
-This is the front end and back end server for Project 5 of the Web Developer path.
+    <meta charset="utf-8">
+    <meta name="description" content="Plateforme incroyable de e-commerce">
 
-### Back end Prerequisites ###
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="./front/css/style.css" rel="stylesheet" />
 
-You will need to have Node and `npm` installed locally on your machine.
 
-### Back end Installation ###
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-Clone this repo. From the "back" folder of the project, run `npm install`. You 
-can then run the server with `node server`. 
-The server should run on `localhost` with default port `3000`. If the
-server runs on another port for any reason, this is printed to the
-console when the server starts, e.g. `Listening on port 3001`.
-# P5_majeri_jamel
+  </head>
+
+  <body>
+    <header>
+      <div class="limitedWidthBlockContainer informations">
+        <div class="limitedWidthBlock">
+          <ul>
+            <li><img src="./front/images/icons/phone.svg" alt="logo de téléphone" class="informations__phone">01 23 45 67 89</li>
+            <li><img src="./front/images/icons/mail.svg" alt="logo d'une enveloppe" class="informations__mail">support@name.com</li>
+            <li><img src="./front/images/icons/adress.svg" alt="logo d'un point de géolocalisation" class="informations__address">01 23 45 67 89</li>
+          </ul>
+        </div>
+      </div>
+      <div class="limitedWidthBlockContainer menu">
+        <div class="limitedWidthBlock">
+          <a href="./front/html/index.html">
+            <img class="logo" src="./front/images/logo.png" alt="Logo de l'entreprise">
+          </a>
+          <nav>
+            <ul>
+              <a href="./front/html/index.html"><li>Accueil</li></a>
+              <a href="./front/html/cart.html"><li>Panier</li></a>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <img class="banniere" src="./front/images/banniere.png" alt="Baniere">
+    </header>
+
+    <main class="limitedWidthBlockContainer">
+      <div class="limitedWidthBlock">
+        <div class="titles">
+          <h1>Nos produits</h1>
+          <h2>Une gamme d'articles exclusifs</h2>
+        </div>
+        <section class="items" id="items">
+
+<!--           <a href="./product.html?id=42">
+            <article>
+              <img src=".../product01.jpg" alt="Lorem ipsum dolor sit amet, Kanap name1">
+              <h3 class="productName">Kanap name1</h3>
+              <p class="productDescription">Dis enim malesuada risus sapien gravida nulla nisl arcu. Dis enim malesuada risus sapien gravida nulla nisl arcu.</p>
+            </article>
+          </a> -->
+
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="limitedWidthBlockContainer footerMain">
+        <div class="limitedWidthBlock">
+          <div>
+            <img class="logo" src="../images/logo.png" alt="Logo de l'entreprise">
+          </div>
+          <div>
+            <p>10 quai de la charente <br>75019 Paris 19</p>
+          </div>
+          <div>
+            <p>Téléphone : 01 23 45 67 89</p>
+          </div>
+          <div>
+            <p>Email : support@name.com</p>
+          </div>
+        </div>
+      </div>
+      <div class="limitedWidthBlockContainer footerSecondary">
+        <div class="limitedWidthBlock">
+          <p>© Copyright 2021 - 2042 | Openclassrooms by Openclassrooms | All Rights Reserved | Powered by <3</p>
+        </div>
+      </div>
+    </footer>
+
+  <script src="./front/js/script.js"></script>
+  </body>
+</html>
