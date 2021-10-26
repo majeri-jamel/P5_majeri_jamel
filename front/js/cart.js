@@ -138,7 +138,7 @@ const validateEmailAdress = (emailString) => {
   const atSymbolIndex = emailString.indexOf("@");
     if(atSymbolIndex < 1) return false;
     
-    const dotIndex = emailString.indexOf(".");
+    const dotIndex = emailString.lastIndexOf(".");
 
     if(dotIndex <= atSymbolIndex + 2) return false;
     
