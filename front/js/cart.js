@@ -155,7 +155,7 @@ const checkForm = () => {
     el_error_DOM.textContent = ""
   
     if(el.value.trim() === ''){
-     el_error_DOM.textContent = "Ce champs ne doit pas être vide"
+     el_error_DOM.textContent = "Ce champ ne doit pas être vide"
      errorsArray.push(el.name + 'ErrorMsg')
     }
   })
@@ -170,11 +170,11 @@ const checkForm = () => {
    /* Check if number in input */
    const isNumber = /\d/;
    if(isNumber.test(firstName_DOM.value)){
-    firstName_DOM_ErrorMsg.textContent = "Ce champs ne doit pas contenir de chiffre"
+    firstName_DOM_ErrorMsg.textContent = "Ce champ ne doit pas contenir de chiffre"
     errorsArray.push(firstName_DOM.name + 'ErrorMsg')
    }
    if(isNumber.test(lastName_DOM.value)){
-    lastName_DOM_ErrorMsg.textContent = "Ce champs ne doit pas contenir de chiffre"
+    lastName_DOM_ErrorMsg.textContent = "Ce champ ne doit pas contenir de chiffre"
     errorsArray.push(lastName_DOM.name + 'ErrorMsg')
    }
    
