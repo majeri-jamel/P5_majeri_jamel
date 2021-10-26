@@ -116,6 +116,7 @@ const handleQuantity = (newQuantity, idProductWithColor) => {
 
 
 const form_DOM = document.querySelector('.cart__order__form')
+form_DOM.autocomplete = 'off';
 const firstName_DOM = document.querySelector('#firstName')
 const lastName_DOM = document.querySelector('#lastName')
 const address_DOM = document.querySelector('#address')
