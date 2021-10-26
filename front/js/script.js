@@ -8,7 +8,7 @@ fetch(allProductsURL).then(res => res.json()).then(res => {
         res.forEach((el)=>{
 
         const DOM_a = document.createElement('a');
-        DOM_a.href = `./product.html?id=${el._id}`
+        DOM_a.href = `./front/html/product.html?id=${el._id}`
         DOM_a.innerHTML = ` <article>
             <img src=${el.imageUrl} alt=${el.altTxt}>
             <h3 class="productName">${el.name}</h3>

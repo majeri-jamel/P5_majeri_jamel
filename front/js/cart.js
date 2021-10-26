@@ -18,7 +18,7 @@ const displayCartContent = async () => {
 
   let totalPrice = 0
 
-     cartContent.forEach(productCart => {        
+    const productsEl = cartContent.forEach(productCart => {        
 
         const productDetails= allProducts.find(product => product._id === productCart.id)
        totalPrice += productDetails.price * productCart.quantity 
@@ -64,6 +64,7 @@ const displayCartContent = async () => {
       deleteItem_DOM.addEventListener('click',()=>removeProduct(idProductWithColor));
      
       const itemQuantity_DOM = el.querySelector('.itemQuantity');
+      const newQuantity =  itemQuantity_DOM.value;
       itemQuantity_DOM.addEventListener('click', (e)=>{
         const newQuantity =  itemQuantity_DOM.value;
         handleQuantity(newQuantity, idProductWithColor);
@@ -133,8 +134,22 @@ const allErrorsDOMArray = [firstName_DOM_ErrorMsg, lastName_DOM_ErrorMsg, addres
 const errorsArray = []
 
 
+const validateEmailAdress = (emailString) => {
+  const atSymbolIndex = emailString.indexOf("@");
+    if(atSymbolIndex < 1) return false;
+    
+    const dotIndex = emailString.indexOf(".");
+
+    if(dotIndex <= atSymbolIndex + 2) return false;
+    
+    // check that the dot is not at the end
+    if (dotIndex === emailString.length - 1) return false;
+    
+    return true;
+}
+
 const checkForm = () => {
-errorsArray.length = 0;
+  errorsArray.length = 0;
   allFormArray.forEach(el=> {
     const el_error_DOM =  document.querySelector(`#${el.name}ErrorMsg`)
     el_error_DOM.textContent = ""
@@ -146,22 +161,31 @@ errorsArray.length = 0;
   })
   
   /* check email format*/
+  if(!validateEmailAdress(email_DOM.value)){
 
-const mailRegEx = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    email_DOM_ErrorMsg.textContent = 'Veuillez saisir un mail valide'
+    errorsArray.push(email_DOM.name + 'ErrorMsgFormatMail')
+  }
 
-  if(!mailRegEx.test(email_DOM.value)){
+   /* Check if number in input */
+   const isNumber = /\d/;
+   if(isNumber.test(firstName_DOM.value)){
+    firstName_DOM_ErrorMsg.textContent = "Ce champs ne doit pas contenir de chiffre"
+    errorsArray.push(firstName_DOM.name + 'ErrorMsg')
+   }
+   if(isNumber.test(lastName_DOM.value)){
+    lastName_DOM_ErrorMsg.textContent = "Ce champs ne doit pas contenir de chiffre"
+    errorsArray.push(lastName_DOM.name + 'ErrorMsg')
+   }
+   
 
-  email_DOM_ErrorMsg.textContent = 'Veuillez saisir un mail valide'
-  errorsArray.push(email_DOM.name + 'ErrorMsgFormatMail')
+
 }
-
-
-}
-
-form_DOM.addEventListener('keypress',()=> {
-  checkForm()
- 
+allFormArray.forEach(el=>{
+  el.addEventListener('focus',()=>checkForm())
 })
+form_DOM.addEventListener('keypress',()=>checkForm())
+
 
 const handleForm = () => {
 
@@ -174,9 +198,12 @@ allFormArray.forEach(el=>{
 
 /* add values to localstorage */
   order_DOM.addEventListener('click',(e)=>{
+
     const isProductsInCart = (localStorage.getItem('cart') || []).length
     e.preventDefault()
+    checkForm();
     const contact = {firstName:firstName_DOM.value, lastName:lastName_DOM.value, address:address_DOM.value, city:city_DOM.value, email:email_DOM.value}
+
     if(!errorsArray.length && isProductsInCart && firstName_DOM.value && lastName_DOM.value && address_DOM.value && city_DOM.value && email_DOM.value){
       localStorage.setItem('contact', JSON.stringify(contact))
       window.location.replace(orderURL_page)

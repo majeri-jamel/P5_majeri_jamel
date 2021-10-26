@@ -18,9 +18,9 @@ const postOrder = async () => {
         },
         body: JSON.stringify({contact: contact, products:productsId })
       }).then(res=>res.json()).then(res=>{
-        confirmation_DOM.innerHTML = res.orderId ? `<p>Command validée ! <br>Votre numéro de commande est : <span>${res.orderId}</span><br>Merci et à bientôt</br>` : null
+        confirmation_DOM.innerHTML = res.orderId ?`<p>Commande validée ! <br>Votre numéro de commande est : <strong>${res.orderId}</strong><br><strong>Merci et à bientôt</strong></br></p>` : `<p>Commande déjà validée</p>`
 
-         localStorage.clear()
+           localStorage.clear()
       });
     }
 
