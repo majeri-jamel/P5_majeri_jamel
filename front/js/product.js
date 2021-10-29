@@ -9,6 +9,14 @@ const cartContent = JSON.parse(localStorage.getItem('cart')) || []
 
 const currentProduct = fetch(fullGetOneProductURL).then(res=>res.json())
 
+const inputQuantity = document.querySelector('#quantity');
+
+inputQuantity.addEventListener('keyup', ()=> {
+    if(inputQuantity.value < 0){
+        inputQuantity.value = inputQuantity.value * - 1
+    }
+})
+
 const displayProductById = async () => {
         const res = await currentProduct;
     

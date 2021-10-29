@@ -42,6 +42,9 @@ const displayCartContent = async () => {
             <p>Qté :${productCart.quantity} </p>
             <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value=${productCart.quantity}>
           </div>
+          <div>
+          <strong>Couleur: <span style="color:black">${productCart.color}</span></strong>
+          </div>
           <div class="cart__item__content__settings__delete">
             <p class="deleteItem">Supprimer</p>
           </div>
@@ -199,14 +202,15 @@ allFormArray.forEach(el=>{
 /* add values to localstorage */
   order_DOM.addEventListener('click',(e)=>{
 
-    const isProductsInCart = (localStorage.getItem('cart') || []).length
-    e.preventDefault()
+    const isProductsInCart = !!(JSON.parse(localStorage.getItem('cart')) || []).length;
+
+    e.preventDefault();
     checkForm();
-    const contact = {firstName:firstName_DOM.value, lastName:lastName_DOM.value, address:address_DOM.value, city:city_DOM.value, email:email_DOM.value}
+    const contact = {firstName:firstName_DOM.value, lastName:lastName_DOM.value, address:address_DOM.value, city:city_DOM.value, email:email_DOM.value};
 
     if(!errorsArray.length && isProductsInCart && firstName_DOM.value && lastName_DOM.value && address_DOM.value && city_DOM.value && email_DOM.value){
-      localStorage.setItem('contact', JSON.stringify(contact))
-      window.location.replace(orderURL_page)
+      localStorage.setItem('contact', JSON.stringify(contact));
+      window.location.replace(orderURL_page);
     }
   
   })
